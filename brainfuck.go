@@ -1,42 +1,12 @@
 /*
 
-i	instructions
-ip	instruction pointer
+`i`		instructions
+`ip`	instruction pointer
 
-b	byte array of length n = 4096; adjust as needed
-bp	byte pointer
+`b`		byte array of length n = 4096; adjust as needed
+`bp`	byte pointer
 
-match	a counter of open (closed) brackets, used to find the matching open (closed) bracket
-
-example programs:
-
-Hello World!
-"++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++."
-
-I LOVE YOU
-"++++++++[>+++++++++>++++++++>++++<<<-]>+.>>.<<+++.+++.+++++++.>+++++.>.<<+++.----------.++++++."
-
-AAA
-"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++>+++[<.>-]"
-
-ABC
-"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++>+++[<.+>-]"
-
-A
-"+>++++++++[<++++++++>-]<."
-The 2nd register acts as a counter, allowing us to run the loop 8 times. Inside the loop, we increment the 1st register by 8. When the counter reaches 0, the loop ends and we move the back to the print the value in the first register. ASCII 'A' is 1 + 8 * 8 = 65. Notice that 8 + 8 = 16. If we want to express 64 as a different product, we'd have to double the number of pluses in one place for every halving in the other: 16 + 4 = 20, 32 + 2 = 34. In general, the closer we can get both factors to the square root of the target quantity the better. (For rectangles of a given area, the square is the rectangle with the smallest perimeter.)
-
-AAA
-"+>++++++++[<++++++++>-]+++[<.>-]"
-
-ABC
-">++++++++[<++++++++>-]+++[<+.>-]"
-
-123456789
-">+++++++[<+++++++>-]+++++++++[<.+>-]"
-
-0123456789
-">+++++++<->[<+++++++>-]++++++++++[<.+>-]"
+`match`	a counter of open (closed) brackets, used to find the matching open (closed) bracket
 
 */
 
@@ -49,6 +19,14 @@ import (
 )
 
 func main() {
+	usage := "Usage: `go run . \"Insert Brainfuck instructions here!\"`"
+
+	if len(os.Args) != 2 {
+		fmt.Println("Wrong number of arguments.")
+		fmt.Println(usage)
+		os.Exit(1)
+	}
+
 	i := os.Args[1]
 	ip := 0
 
