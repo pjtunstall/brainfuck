@@ -1,4 +1,4 @@
-package main
+package bf
 
 import (
 	"errors"
@@ -10,12 +10,12 @@ func TestCloseBracket_OutOfRangeError(t *testing.T) {
 
 	_, err := closeBracket(input, 1)
 	if err == nil {
-		t.Errorf("Expected an error, but got nil")
+		t.Errorf("Expected an error, but got: nil")
 	}	
 
-	var outOfRangeErr *OutOfRangeError	
+	var outOfRangeErr OutOfRangeError	
 	if !errors.As(err, &outOfRangeErr) {
-		t.Errorf("Expected OutOfRangeError, but got %T", err)
+		t.Errorf("Expected OutOfRangeError, but got: %T", err)
 	}
 
 	if outOfRangeErr.IP != -1 {

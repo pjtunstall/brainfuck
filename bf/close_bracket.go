@@ -1,11 +1,11 @@
-package main
+package bf
 
-func closeBracket(i string, ip int) (int, *OutOfRangeError) {
+func closeBracket(i string, ip int) (int, error) {
 	match := 1
 	for match > 0 {
 		ip--
 		if ip < 0 {
-			return ip, &OutOfRangeError{
+			return ip, OutOfRangeError{
 				IP: ip,
 				Msg: "instruction pointer out of range to the left.\nAre you missing an open bracket?",
 			}

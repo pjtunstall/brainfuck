@@ -1,9 +1,15 @@
-package main
+package bf
 
-import "testing"
+import (
+	"testing"
+	"time"
+)
 
 func TestInterpret(t *testing.T) {
-	s, err := interpret("+>++++++++[<++++++++>-]<.")
+	stopChan := make(chan(struct{}))
+	timeout := time.Second // Unused. Just supplied to match the signature.
+
+	s, err := Interpret("+>++++++++[<++++++++>-]<.", stopChan, timeout)
 	if err != nil {
 		t.Errorf("Expected 'A', but got %s", err.Error())
 	}
@@ -11,7 +17,7 @@ func TestInterpret(t *testing.T) {
 		t.Errorf("Expected 'A', but got '%q'", s)
 	}
 
-	s, err = interpret("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++>+++[<.>-]")
+	s, err = Interpret("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++>+++[<.>-]", stopChan, timeout)
 	if err != nil {
 		t.Errorf("Expected 'A', but got %s", err.Error())
 	}
@@ -19,7 +25,7 @@ func TestInterpret(t *testing.T) {
 		t.Errorf("Expected 'AAA', but got '%q'", s)
 	}
 
-	s, err = interpret("+>++++++++[<++++++++>-]+++[<.>-]")
+	s, err = Interpret("+>++++++++[<++++++++>-]+++[<.>-]", stopChan, timeout)
 	if err != nil {
 		t.Errorf("Expected 'A', but got %s", err.Error())
 	}
@@ -27,7 +33,7 @@ func TestInterpret(t *testing.T) {
 		t.Errorf("Expected 'AAA', got '%q'", s)
 	}
 
-	s, err = interpret("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++>+++[<.+>-]")
+	s, err = Interpret("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++>+++[<.+>-]", stopChan, timeout)
 	if err != nil {
 		t.Errorf("Expected 'A', but got %s", err.Error())
 	}
@@ -35,7 +41,7 @@ func TestInterpret(t *testing.T) {
 		t.Errorf("Expected 'ABC', but got '%q'", s)
 	}
 
-	s, err = interpret(">++++++++[<++++++++>-]+++[<+.>-]")
+	s, err = Interpret(">++++++++[<++++++++>-]+++[<+.>-]", stopChan, timeout)
 	if err != nil {
 		t.Errorf("Expected 'A', but got %s", err.Error())
 	}
@@ -43,7 +49,7 @@ func TestInterpret(t *testing.T) {
 		t.Errorf("Expected 'ABC', but got '%q'", s)
 	}
 
-	s, err = interpret("++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.")
+	s, err = Interpret("++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.", stopChan, timeout)
 	if err != nil {
 		t.Errorf("Expected 'A', but got %s", err.Error())
 	}
@@ -51,7 +57,7 @@ func TestInterpret(t *testing.T) {
 		t.Errorf("Expected 'Hello World!\n', but got '%q'", s)
 	}
 
-	s, err = interpret(">+++++++[<+++++++>-]+++++++++[<.+>-]")
+	s, err = Interpret(">+++++++[<+++++++>-]+++++++++[<.+>-]", stopChan, timeout)
 	if err != nil {
 		t.Errorf("Expected 'A', but got %s", err.Error())
 	}
@@ -59,7 +65,7 @@ func TestInterpret(t *testing.T) {
 		t.Errorf("Expected '123456789', got '%q'", s)
 	}
 
-	s, err = interpret(">+++++++<->[<+++++++>-]++++++++++[<.+>-]")
+	s, err = Interpret(">+++++++<->[<+++++++>-]++++++++++[<.+>-]", stopChan, timeout)
 	if err != nil {
 		t.Errorf("Expected 'A', but got %s", err.Error())
 	}
@@ -67,7 +73,7 @@ func TestInterpret(t *testing.T) {
 		t.Errorf("Expected '0123456789', got '%q'", s)
 	}
 
-	s, err = interpret("++++++++[>+++++++++>++++++++>++++<<<-]>+.>>.<<+++.+++.+++++++.>+++++.>.<<+++.----------.++++++.")
+	s, err = Interpret("++++++++[>+++++++++>++++++++>++++<<<-]>+.>>.<<+++.+++.+++++++.>+++++.>.<<+++.----------.++++++.", stopChan, timeout)
 	if err != nil {
 		t.Errorf("Expected 'A', but got %s", err.Error())
 	}
