@@ -15,7 +15,7 @@ func WrappedInterpretWithTimeout(i string, t time.Duration) (string, error) {
 	
 	go func() {
 		output, err = Interpret(i, stopInterpretingChan, t)
-		once.Do(func() { close(stopWaitingChan) })
+		close(stopWaitingChan)
 	}()
 
 	select {
@@ -25,7 +25,8 @@ func WrappedInterpretWithTimeout(i string, t time.Duration) (string, error) {
 		case <-stopWaitingChan:
 	}
 
-	<- stopWaitingChan
+	once.Do(func () { close(stopInterpretingChan) })
+	once.Do(func() { close(stopWaitingChan) })
 
 	return output, err
 }
