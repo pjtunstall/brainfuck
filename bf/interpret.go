@@ -17,15 +17,6 @@ import (
 // `match`	a counter of open (closed) brackets,
 // 			used to find the matching open (closed) bracket
 
-type OutOfRangeError struct {
-	IP int
-	Msg string
-}
-
-func (e OutOfRangeError) Error() string {
-	return fmt.Sprintf("Error: %s (instruction pointer: %d)", e.Msg, e.IP)
-}
-
 func Interpret(i string, stopChan chan(struct{}), t time.Duration) (string, error) {
 	ip := 0
 
