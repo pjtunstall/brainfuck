@@ -8,7 +8,7 @@ Brainfuck is an [esoteric](https://en.wikipedia.org/wiki/Esoteric_programming_la
 
 ## Context
 
-This is an exercise from my early days of learning Go, included here for fun, along with some extra tests and error handling.
+This is an exercise from my early days of learning Go, included here for fun, along with some extra error handling, tests, and a timeout option.
 
 Brainfuck captured by imagination when I first encountered it in the final exam of our 4-week intensive intro to Go. With 6 minutes to spare, I didn't manage to write an interpreter during the exam, but the concept made me laugh, so I couldn't resist figuring it out afterwards.
 
