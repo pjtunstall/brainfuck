@@ -15,6 +15,7 @@ func TestWrappedInterpretWithTimeout(t *testing.T) {
 		t.Errorf("Expected '', but got '%q'", s)
 	}
 
+	// A fuzz test to check for unexpected panics.
 	bfStrings := generateRandomBrainfuck(32, 16)
 	for _, bfString := range bfStrings {
 		_, err := WrappedInterpretWithTimeout(bfString, 3)

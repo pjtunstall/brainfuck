@@ -4,21 +4,21 @@
 
 A program to execute [Brainfuck](https://en.wikipedia.org/wiki/Brainfuck) code.
 
-Brainfuck is an [esoteric](https://en.wikipedia.org/wiki/Esoteric_programming_language) programming language: a humorously inconvenient language, consisting of just eight symbols, that is nevertheless real, i.e. [Turing complete](https://en.wikipedia.org/wiki/Turing_completeness), and theoretically capable of performing any computation that can be done by a more conventional programming language.
+Invented by Urban Müller in 1993, Brainfuck is an [esoteric](https://en.wikipedia.org/wiki/Esoteric_programming_language) programming language: a humorously inconvenient language, consisting of just eight single-character commands, that is nevertheless [Turing complete](https://en.wikipedia.org/wiki/Turing_completeness), and hence theoretically capable of performing any computation that can be done by a more conventional programming language.
 
 ## Context
 
-This is an exercise from my early days of learning Go, included here for fun, along with some extra error handling, tests, and a timeout option.
-
-Brainfuck captured by imagination when I first encountered it in the final exam of our 4-week intensive intro to Go. With 6 minutes to spare, I didn't manage to write an interpreter during the exam, but the concept made me laugh, so I couldn't resist figuring it out afterwards.
+The core of this program is an exercise from my early days at 01Founders, included here for fun, along with some extra error handling, tests, and a timeout option.
 
 # Usage
 
-Assuming you have [Go](https://go.dev/) installed, clone this repo and navigate into it, then enter `go run . "Insert Brainfuck instructions here!"` in your terminal to build and run in one step. Optionally follow this with a positive number, representing a timeout in seconds: `go run . "Insert Brainfuck instructions here!" 10`.
+Assuming you have [Go](https://go.dev/) installed, clone this repo and navigate into it, then enter `go run . "Insert Brainfuck instructions here!"` in your terminal to build and run the program. Optionally follow this with a positive number, representing a timeout in seconds: `go run . "Insert Brainfuck instructions here!" 10`.
 
 Alternatively, compile the source code once and for all with `go build`, then run the resulting executable file with `./brainfuck "Insert Brainfuck instructions here!"` on macOS or Linux, or `brainfuck.exe "Insert Brainfuck instructions here!"` on Windows.
 
-See [Wikipedia](https://en.wikipedia.org/wiki/Brainfuck#Language_design) for a guide to the eight commands in the Brainfuck instruction set.
+To run all tests, `go test ./...`.
+
+See [Wikipedia](https://en.wikipedia.org/wiki/Brainfuck#Language_design) for a guide to the eight commands of the Brainfuck instruction set.
 
 ## Example programs
 
@@ -53,4 +53,10 @@ ABC
 
 I LOVE YOU
 "++++++++[>+++++++++>++++++++>++++<<<-]>+.>>.<<+++.+++.+++++++.>+++++.>.<<+++.----------.++++++."
+```
+
+An infinite loop:
+
+```
+"+[]"
 ```

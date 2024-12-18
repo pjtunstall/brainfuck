@@ -8,22 +8,11 @@ import (
 	"time"
 )
 
-// `i`		instructions
-// `ip`		instruction pointer
-
-// `b`		byte array of length n = 4096; adjust as needed
-// `bp`		byte pointer
-
-// `match`	a counter of open (closed) brackets,
-// 			used to find the matching open (closed) bracket
-
 func Interpret(i string, stopChan chan(struct{}), t time.Duration) (string, error) {
-	ip := 0
-
-	n := 4096
-	b := make([]byte, n)
-
-	bp := 0
+	n := 30_000
+	b := make([]byte, n)	
+	ip := 0 // instruction pointer
+	bp := 0 // byte pointer
 
 	var o strings.Builder
 	var err error
