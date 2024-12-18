@@ -1,7 +1,6 @@
 package bf
 
 import (
-	"sync"
 	"time"
 )
 
@@ -11,7 +10,6 @@ func WrappedInterpretWithTimeout(i string, t time.Duration) (string, error) {
 
 	stopInterpretingChan := make(chan(struct{}))
 	stopWaitingChan := make(chan(struct{}))
-	var once sync.Once
 	
 	go func() {
 		output, err = Interpret(i, stopInterpretingChan, t)
@@ -19,14 +17,12 @@ func WrappedInterpretWithTimeout(i string, t time.Duration) (string, error) {
 	}()
 
 	select {
-		case <-time.After(t): {
-			close(stopInterpretingChan)
-		}
-		case <-stopWaitingChan:
+		case <-time.After(t): // Timout expired.
+		case <-stopWaitingChan: // Interpret finished naturally with an output.
 	}
 
-	once.Do(func () { close(stopInterpretingChan) })
-	once.Do(func() { close(stopWaitingChan) })
+	close(stopInterpretingChan)
+	<- stopWaitingChan // Wait for the output if the timeout signal was sent.
 
 	return output, err
 }
