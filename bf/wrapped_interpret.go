@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-func WrappedInterpretWithTimeout(i string, t time.Duration) (string, error) {
+func WrappedInterpret(i string, t time.Duration) (string, error) {
 	var output string
 	var err error
 

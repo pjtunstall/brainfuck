@@ -5,8 +5,8 @@ import (
 	"testing"
 )
 
-func TestWrappedInterpretWithTimeout_HappyPath(t *testing.T) {
-	s, err := WrappedInterpretWithTimeout("++++++++[>+++++++++>++++++++>++++<<<-]>+.>>.<<+++.+++.+++++++.>+++++.>.<<+++.----------.++++++.", 1)
+func TestWrappedInterpret_HappyPath(t *testing.T) {
+	s, err := WrappedInterpret("++++++++[>+++++++++>++++++++>++++<<<-]>+.>>.<<+++.+++.+++++++.>+++++.>.<<+++.----------.++++++.", 1)
 	if err == nil {
 		t.Errorf("expected a timeout error, but got: nil")
 	}
@@ -16,7 +16,7 @@ func TestWrappedInterpretWithTimeout_HappyPath(t *testing.T) {
 }
 
 // A fuzz test to check for unexpected panics.
-func TestWrappedInterpretWithTimeout_NoPanic(t *testing.T) {
+func TestWrappedInterpret_NoPanic(t *testing.T) {
 	defer func() {
         if r := recover(); r != nil {
             t.Fatalf("Test panicked unexpectedly: %v", r)
@@ -25,7 +25,7 @@ func TestWrappedInterpretWithTimeout_NoPanic(t *testing.T) {
 
 	bfStrings := generateRandomBrainfuck(256, 16)
 	for _, bfString := range bfStrings {
-		_, _ = WrappedInterpretWithTimeout(bfString, 3)
+		_, _ = WrappedInterpret(bfString, 3)
 	}
 }
 

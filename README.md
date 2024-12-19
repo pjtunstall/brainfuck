@@ -16,7 +16,7 @@ Assuming you have [Go](https://go.dev/) installed, clone this repo and navigate 
 
 Alternatively, compile the source code once and for all with `go build`, then run the resulting executable file with `./brainfuck "Insert Brainfuck instructions here!"` on macOS or Linux, or `brainfuck.exe "Insert Brainfuck instructions here!"` on Windows.
 
-To run all tests, `go test ./...`.
+To run all tests, `go test ./...`. In case you want to run them again without changing the code, e.g. to repeat the fuzz test, enter `go test -count=1 ./...` to make sure they really do run again rather than relying on cached results from earlier trials.
 
 See [Wikipedia](https://en.wikipedia.org/wiki/Brainfuck#Language_design) for a guide to the eight commands of the Brainfuck instruction set.
 

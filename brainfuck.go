@@ -14,7 +14,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	output, err := bf.WrappedInterpretWithTimeout(input, timeout)
+	output, err := bf.WrappedInterpret(input, timeout)
 
 	if err != nil {
 		fmt.Println("Error:", err)
