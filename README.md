@@ -10,7 +10,7 @@ Invented by Urban Müller in 1993, Brainfuck is an [esoteric](https://en.wikiped
 
 The core of this program is an exercise from my early days at 01Founders, included here for fun, along with some extra error handling, tests, and a timeout option.
 
-# Usage
+## Usage
 
 Assuming you have [Go](https://go.dev/) installed, clone this repo and navigate into it, then enter `go run . "Insert Brainfuck instructions here!"` in your terminal to build and run the program. Optionally follow this with a positive number, representing a timeout in seconds: `go run . "Insert Brainfuck instructions here!" 10`.
 
@@ -19,6 +19,26 @@ Alternatively, compile the source code once and for all with `go build`, then ru
 To run all tests, `go test ./...`. In case you want to run them again without changing the code, e.g. to repeat the fuzz test, enter `go test -count=1 ./...` to make sure they really do run again rather than relying on cached results from earlier trials.
 
 See [Wikipedia](https://en.wikipedia.org/wiki/Brainfuck#Language_design) for a guide to the eight commands of the Brainfuck instruction set.
+
+## Structure
+
+```
+brainfuck/
+├── brainfuck.go (main)
+├── parse_args.go
+└── bf/
+    ├── wrapped_interpret.go
+    ├── interpret.go
+    ├── open_bracket.go
+    ├── close_pracket.go
+    └── out_of_range_error.go
+```
+
+The `main` function in `brainfuck.go` calls `parge_args`, then `bf.WrappedInterpret`.
+
+`bf.WrappedInterpret` handles the timeout logic, in case the timeout logic is selected. It passes a `stopInterpretingChan` channel to `bf.Interpret.go`. When a timeout signal is sent, it's received in the interpreting loop and `bf.Interpret.go` returns an empty result and a timeout error. `bf.WrappedInterpret` uses a second channel, `stopWaitingChan`, to make sure that these values are received before returning them to `main`.
+
+Two helper functions for `bf.Interpret.go` (`open_bracket` and `close_bracket`) take care of brackets, which, in Brainfuck, cause the intruction pointer to jump according to certain conditions. These helpers returns the new position of the instruction pointer or, if necessary, a `bf.OutOfRangeError`, letting the user know if the instruction pointer went beyond the last instruction or before the first, its last position, and the likely reason: a missing open or close bracket.
 
 ## Example programs
 
