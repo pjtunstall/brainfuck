@@ -4,7 +4,7 @@
 - [Context](#context)
 - [Usage](#usage)
 - [Structure](#structure)
-- [Example programs](#example-programs)
+- [Sample programs](#sample-programs)
 
 ## What's this?
 
@@ -70,7 +70,7 @@ The `main` function in `brainfuck.go` calls `parge_args`, then `bf.WrappedInterp
 
 Two helper functions for `bf.Interpret.go` (`open_bracket` and `close_bracket`) take care of brackets, which, in Brainfuck, cause the intruction pointer to jump according to certain conditions. These helpers returns the new position of the instruction pointer or, if necessary, a `bf.OutOfRangeError`, letting the user know if the instruction pointer went beyond the last instruction or before the first, its last position, and the likely reason: a missing open or close bracket.
 
-## Example programs
+## Sample programs
 
 ```
 Hello World!
