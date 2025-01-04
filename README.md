@@ -1,5 +1,11 @@
 # Brainfuck
 
+- [What's this](#whats-this)
+- [Context](#context)
+- [Usage](#usage)
+- [Structure](#structure)
+- [Example programs](#example-programs)
+
 ## What's this?
 
 A program to execute [Brainfuck](https://en.wikipedia.org/wiki/Brainfuck) code.
@@ -12,9 +18,33 @@ The core of this program is an exercise from my early days at 01Founders, includ
 
 ## Usage
 
-Assuming you have [Go](https://go.dev/) installed, clone this repo and navigate into it, then enter `go run . "Insert Brainfuck instructions here!"` in your terminal to build and run the program. Optionally follow this with a positive number, representing a timeout in seconds: `go run . "Insert Brainfuck instructions here!" 10`.
+Assuming you have [Go](https://go.dev/) installed, open a terminal and enter the following:
 
-Alternatively, compile the source code once and for all with `go build`, then run the resulting executable file with `./brainfuck "Insert Brainfuck instructions here!"` on macOS or Linux, or `brainfuck.exe "Insert Brainfuck instructions here!"` on Windows.
+```bash
+git clone https://github.com/pjtunstall/brainfuck
+cd brainfuck
+go run . "Insert Brainfuck instructions here!"
+```
+
+Optionally that final command follow this with a positive number, representing a timeout in seconds:
+
+```bash
+go run . "Insert Brainfuck instructions here!" 10`.
+```
+
+You can also compile the source code once and for all with `go build`, then run the resulting executable file with
+
+```bash
+./brainfuck "Insert Brainfuck instructions here!"
+```
+
+on macOS or Linux, or
+
+```bash
+brainfuck.exe "Insert Brainfuck instructions here!"
+```
+
+on Windows.
 
 To run all tests, `go test ./...`. In case you want to run them again without changing the code, e.g. to repeat the fuzz test, enter `go test -count=1 ./...` to make sure they really do run again rather than relying on cached results from earlier trials.
 
