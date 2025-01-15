@@ -60,7 +60,7 @@ brainfuck/
     ├── wrapped_interpret.go
     ├── interpret.go
     ├── open_bracket.go
-    ├── close_pracket.go
+    ├── close_bracket.go
     └── out_of_range_error.go
 ```
 
@@ -68,7 +68,7 @@ The `main` function in `brainfuck.go` calls `parge_args`, then `bf.WrappedInterp
 
 `bf.WrappedInterpret` handles the timeout logic, in case the timeout logic is selected. It passes a `stopInterpretingChan` channel to `bf.Interpret.go`. When a timeout signal is sent, it's received in the interpreting loop and `bf.Interpret.go` returns an empty result and a timeout error. `bf.WrappedInterpret` uses a second channel, `stopWaitingChan`, to make sure that these values are received before returning them to `main`.
 
-Two helper functions for `bf.Interpret.go` (`open_bracket` and `close_bracket`) take care of brackets, which, in Brainfuck, cause the intruction pointer to jump according to certain conditions. These helpers returns the new position of the instruction pointer or, if necessary, a `bf.OutOfRangeError`, letting the user know if the instruction pointer went beyond the last instruction or before the first, its last position, and the likely reason: a missing open or close bracket.
+Two helper functions for `bf.Interpret.go` (`open_bracket` and `close_bracket`) take care of brackets, which, in Brainfuck, cause the intruction pointer to jump according to certain conditions. These helpers return the new position of the instruction pointer or, if necessary, a `bf.OutOfRangeError`, letting the user know if the instruction pointer went beyond the last instruction or before the first, its last position, and the likely reason: a missing open or close bracket.
 
 ## Sample programs
 
