@@ -18,33 +18,25 @@ The core of this program is an exercise from my early days at 01Founders, includ
 
 ## Usage
 
-Assuming you have [Go](https://go.dev/) installed, open a terminal and enter the following:
+Assuming you have [Go](https://go.dev/) installed, open a terminal and enter the following three commands. (The `$` here represents the terminal prompt rather than part of what you type. Your terminal may vary.)
 
 ```bash
-git clone https://github.com/pjtunstall/brainfuck
-cd brainfuck
-go run . "Insert Brainfuck instructions here!"
+$ git clone https://github.com/pjtunstall/brainfuck
+$ cd brainfuck
+$ go run . ">++++++++[<++++++++>-]+++[<+.>-]"
+Output: ABC
 ```
 
-Optionally that final command follow this with a positive number, representing a timeout in seconds:
+... or Brainfuck instructions of your choice enclosed in double quotes. The third command above will build and run the program in one step. Alternatively, you can compile the source code just once in advance with `go build`, then run the resulting executable file any number of times with `./brainfuck` on macOS or Linux, or `brainfuck.exe` on Windows, followed by your Brainfuck instructions.
+
+Optionally you can add a positive number after the instructions, representing a timeout in seconds:
 
 ```bash
-go run . "Insert Brainfuck instructions here!" 10`.
+$ ./brainfuck "+[]" 1
+Error: timed out after 1 seconds
 ```
 
-You can also compile the source code once and for all with `go build`, then run the resulting executable file with
-
-```bash
-./brainfuck "Insert Brainfuck instructions here!"
-```
-
-on macOS or Linux, or
-
-```bash
-brainfuck.exe "Insert Brainfuck instructions here!"
-```
-
-on Windows.
+You can also specify a timeout after the `go run .` syntax, but, in that case, there will be a short delay while the program compiles. The seconds are only counted from when the program starts running, not from when it starts compiling.
 
 To run all tests, `go test ./...`. In case you want to run them again without changing the code, e.g. to repeat the fuzz test, enter `go test -count=1 ./...` to make sure they really do run again rather than relying on cached results from earlier trials.
 
